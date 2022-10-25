@@ -1,9 +1,17 @@
 import React from 'react';
-import {getAuth} from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import app from '../Hook/firebaseConfig';
 const auth = getAuth(app);
 const Register = () => {
-    
+    const handleSubmit = event => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(name,email,password);
+        // console.log(form);
+    }
     return (
         <div className="mt-5 position-absolute top-50 start-50 translate-middle ">
             <div className='mb-3 text-center'>
@@ -15,17 +23,28 @@ const Register = () => {
                     <div className="input-box">
                         <input
                             className="form-control p-3 m-2"
+                            type="text"
+                            name='name'
+                            placeholder="Your name"
+                        />
+                        <input
+                            className="form-control p-3 m-2"
                             type="email"
+                            name='email'
                             placeholder="Email"
+                            required
                         />
                         <input
                             className="form-control p-3 m-2"
                             type="password"
+                            name='password'
                             placeholder="password"
+                            required
                         />
 
 
-                        <button className="btn btn-info mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
+                        <button onClick={handleSubmit}
+                            type="submit" className="btn btn-info mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
                             Signup Now
                         </button>
                     </div>

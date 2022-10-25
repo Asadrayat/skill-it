@@ -8,7 +8,12 @@ import { AuthContext } from '../../Context/AuthProvider/Authprovider';
 import './Header.css'
 import { Image } from 'react-bootstrap';
 const Header = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
+    const handleLogout = () => {
+        logout()
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
     return (
         <div>
             <nav className="d-flex justify-content-around align-items-center bg-dark p-3 flex-wrap">
@@ -42,13 +47,30 @@ const Header = () => {
                             FAQ
                         </li>
                     </Link>
-                    {<Link to="/login" className="text-decoration-none">
-                        <li className="nav-link items  ms-5 text-light fw-bolder">Login</li>
-                    </Link>}
-                    <p className='text-light ms-3'>{user?.displayName}</p>
+
+                    <p className='text-light ms-3'>
+                        {
+                            user?.uid ?
+                                <>
+                                    <button onClick={handleLogout} className='me-2 btn btn-light'>Logout</button>
+                                    <span>{user?.displayName}</span>
+                                </>
+                                :
+                                <>
+                                    <div className='d-flex justify-content-around'>
+                                        <Link to="/login" className="text-decoration-none">
+                                            <li className="nav-link items  ms-1 text-light fw-bolder">Login</li>
+                                        </Link>
+                                        <Link to="/register" className="text-decoration-none">
+                                            <li className="nav-link items  ms-1 text-light fw-bolder">Signup</li>
+                                        </Link>
+                                    </div>
+                                </>
+                        }
+                    </p>
                     <div className='ms-3' >
-                        {user.photoURL2 ?
-                            <Image roundedCircle style={{ height: "40px" }} src={user.photoURL} ></Image>
+                        {user?.photoURL ?
+                            <Image roundedCircle style={{ height: "40px" }} src={user?.photoURL} ></Image>
                             : <FontAwesomeIcon className='bg-light' icon={faUser}></FontAwesomeIcon>
                         }
                     </div>
