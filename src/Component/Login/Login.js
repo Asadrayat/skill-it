@@ -1,7 +1,16 @@
 import React from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider/Authprovider';
+import {GoogleAuthProvider} from 'firebase/auth';
 import './Login.css'
+
 const Login = () => {
+    const { providerLogin } = useContext(AuthContext);
+    const googleProvider = new GoogleAuthProvider();
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider);
+    }
     return (
         <div className="mt-5 position-absolute top-50 start-50 translate-middle ">
             <div className="main-container d-flex container justify-content-between align-items-center justify-content-center">
@@ -33,7 +42,7 @@ const Login = () => {
                             Login
                         </button>
                     </div>
-                    <button className="btn mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
+                    <button onClick={handleGoogleSignIn} className="btn mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
                         <div class="github">
                             <img
                                 className=" px-2 image-fluid btn-image"
