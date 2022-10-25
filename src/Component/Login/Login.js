@@ -9,7 +9,12 @@ const Login = () => {
     const { providerLogin } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
     const handleGoogleSignIn = () => {
-        providerLogin(googleProvider);
+        providerLogin(googleProvider)
+        .then(result =>{
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(error =>console.error(error));
     }
     return (
         <div className="mt-5 position-absolute top-50 start-50 translate-middle ">
