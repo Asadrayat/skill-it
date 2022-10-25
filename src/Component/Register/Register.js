@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom';
 const Register = () => {
     return (
         <div className="mt-5 position-absolute top-50 start-50 translate-middle ">
+            <div className='mb-3 text-center'>
+                <h1>Signup here</h1>
+            </div>
             <div className="main-container d-flex container justify-content-between align-items-center justify-content-center">
-                <div className="register-form ">
+                <div className="register-form  text-center">
                     <p>{"error"}</p>
                     <div className="input-box">
                         <input
