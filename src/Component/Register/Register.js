@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
+import {getAuth} from 'firebase/auth';
+import app from '../Hook/firebaseConfig';
+const auth = getAuth(app);
 const Register = () => {
+    
     return (
         <div className="mt-5 position-absolute top-50 start-50 translate-middle ">
             <div className='mb-3 text-center'>
@@ -21,7 +23,7 @@ const Register = () => {
                             type="password"
                             placeholder="password"
                         />
-                       
+
 
                         <button className="btn btn-info mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
                             Signup Now
