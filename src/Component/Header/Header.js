@@ -34,15 +34,17 @@ const Header = () => {
                     <Link to="/courses" className="text-decoration-none">
                         <li className="nav-link items  ms-5 text-light fw-bolder">Courses</li>
                     </Link>
+                    <Link to='/blog' className="text-decoration-none">
+                        <li
+                            role="button"
+                            className="nav-link items  ms-5 text-light fw-bolder"
+                        >
+                            Blog
+                        </li>
+                    </Link>
 
-                    <li
-                        role="button"
-                        className="nav-link items  ms-5 text-light fw-bolder"
-                    >
-                        Blog
-                    </li>
 
-                    <Link to="/register" className="text-decoration-none">
+                    <Link to="/faq" className="text-decoration-none">
                         <li className="nav-link items  ms-5 text-light fw-bolder">
                             FAQ
                         </li>

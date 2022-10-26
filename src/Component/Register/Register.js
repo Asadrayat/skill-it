@@ -10,10 +10,11 @@ const Register = () => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
+        const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
         // console.log(name,email, password);
-        createUser(email,password,name)
+        createUser(email,password,name,photoURL)
         .then(result =>{
             const user = result.user;
             console.log(user);
@@ -36,6 +37,12 @@ const Register = () => {
                             type="text"
                             name='name'
                             placeholder="Your name"
+                        />
+                        <input
+                            className="form-control p-3 m-2"
+                            type="text"
+                            name='photoURL'
+                            placeholder="photoURL"
                         />
                         <input
                             className="form-control p-3 m-2"

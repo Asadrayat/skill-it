@@ -7,12 +7,15 @@ import Faq from './Component/Faq/Faq';
 import Main from './Component/Layout/Main';
 import Login from './Component/Login/Login';
 import Register from './Component/Register/Register';
+import PrivateRoute from './Component/PrivateRoute/PrivateRoute'
+import Error from './Component/Error/Error';
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Main></Main>,
+      errorElement : <Error></Error>,
       children : [
         {
           path: "/",
@@ -20,7 +23,7 @@ function App() {
         },
         {
           path: "/courses",
-          element: <Courses></Courses>,
+          element: <PrivateRoute><Courses></Courses></PrivateRoute> ,
         },
         {
           path: "/login",
