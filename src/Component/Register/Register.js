@@ -1,6 +1,7 @@
 import React from 'react';
 import { getAuth } from 'firebase/auth';
 import app from '../Hook/firebaseConfig';
+import { Button, Form } from 'react-bootstrap';
 const auth = getAuth(app);
 const Register = () => {
     const handleSubmit = event => {
@@ -9,7 +10,7 @@ const Register = () => {
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name,email,password);
+        console.log(name,email, password);
         // console.log(form);
     }
     return (
@@ -20,7 +21,25 @@ const Register = () => {
             <div className="main-container d-flex container justify-content-between align-items-center justify-content-center">
                 <div className="register-form  text-center">
                     <p>{"error"}</p>
-                    <div className="input-box">
+
+                    {/* <Form onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            
+                            <Form.Control type="email" name='email' placeholder="Enter email" />
+                            
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            
+                            <Form.Control type="password" name='password' placeholder="Password" />
+                        </Form.Group>
+                        
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Form> */}
+
+                    <form onSubmit={handleSubmit} className="input-box">
                         <input
                             className="form-control p-3 m-2"
                             type="text"
@@ -43,11 +62,11 @@ const Register = () => {
                         />
 
 
-                        <button onClick={handleSubmit}
+                        <button 
                             type="submit" className="btn btn-info mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
                             Signup Now
                         </button>
-                    </div>
+                    </form >
                     <button className="btn mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
                         <div class="github">
                             <img
