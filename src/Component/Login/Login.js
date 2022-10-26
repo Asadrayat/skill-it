@@ -1,35 +1,62 @@
 import React from 'react';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/Authprovider';
-import {GoogleAuthProvider} from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import './Login.css'
 
 const Login = () => {
+    const { signIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+                navigate('/');
+            })
+            .catch(e => console.error(e))
+    }
     const { providerLogin } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
     const handleGoogleSignIn = () => {
         providerLogin(googleProvider)
-        .then(result =>{
-            const user = result.user;
-            console.log(user);
-        })
-        .catch(error =>console.error(error));
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error));
+    }
+    const githubProvider = new GithubAuthProvider();
+    const handleGithubSignIn = () => {
+        providerLogin(githubProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error));
     }
     return (
         <div className="mt-5 position-absolute top-50 start-50 translate-middle ">
             <div className="main-container d-flex container justify-content-between align-items-center justify-content-center">
                 <div className="register-form ">
                     <p>{"error"}</p>
-                    <div className="input-box">
+                    <form onSubmit={handleSubmit} className="input-box">
                         <input
                             className="form-control p-3 m-2"
                             type="email"
+                            name="email"
                             placeholder="Email"
                         />
                         <input
                             className="form-control p-3 m-2"
                             type="password"
+                            name="password"
                             placeholder="password"
                         />
                         <p className="link ">
@@ -46,7 +73,7 @@ const Login = () => {
                         <button className="btn btn-info mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
                             Login
                         </button>
-                    </div>
+                    </form >
                     <button onClick={handleGoogleSignIn} className="btn mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
                         <div class="github">
                             <img
@@ -58,7 +85,7 @@ const Login = () => {
 
                         <p className="fw-bold">Google SignIn</p>
                     </button>
-                    <button className="btn mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
+                    <button onClick={handleGithubSignIn} className="btn mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
                         <div class="github">
                             <img
 

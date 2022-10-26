@@ -1,17 +1,25 @@
 import React from 'react';
 import { getAuth } from 'firebase/auth';
 import app from '../Hook/firebaseConfig';
-import { Button, Form } from 'react-bootstrap';
+import { AuthContext } from '../../Context/AuthProvider/Authprovider';
+import { useContext } from 'react';
 const auth = getAuth(app);
 const Register = () => {
+    const {createUser} = useContext(AuthContext);
     const handleSubmit = event => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name,email, password);
-        // console.log(form);
+        // console.log(name,email, password);
+        createUser(email,password,name)
+        .then(result =>{
+            const user = result.user;
+            console.log(user);
+            form.reset();
+        })
+        .catch(e => console.error(e))
     }
     return (
         <div className="mt-5 position-absolute top-50 start-50 translate-middle ">
@@ -21,23 +29,6 @@ const Register = () => {
             <div className="main-container d-flex container justify-content-between align-items-center justify-content-center">
                 <div className="register-form  text-center">
                     <p>{"error"}</p>
-
-                    {/* <Form onSubmit={handleSubmit}>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            
-                            <Form.Control type="email" name='email' placeholder="Enter email" />
-                            
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            
-                            <Form.Control type="password" name='password' placeholder="Password" />
-                        </Form.Group>
-                        
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
-                    </Form> */}
 
                     <form onSubmit={handleSubmit} className="input-box">
                         <input
