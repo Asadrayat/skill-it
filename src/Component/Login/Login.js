@@ -4,8 +4,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/Authprovider';
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import './Login.css'
+import { useState } from 'react';
 
 const Login = () => {
+    const [error, setError] = useState(null);
     const { signIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const handleSubmit = (event) => {
@@ -45,7 +47,7 @@ const Login = () => {
         <div className="mt-5  ">
             <div className="main-container d-flex container justify-content-between align-items-center justify-content-center">
                 <div className="register-form ">
-                    <p className='ms-3'>{"error"}</p>
+                    <p className='ms-3'>{error}</p>
                     <form onSubmit={handleSubmit} className="input-box">
                         <input
                             className="form-control p-3 m-2"

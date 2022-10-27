@@ -1,9 +1,10 @@
 import React from 'react';
 
-const Allcourses = () => {
+const Allcourses = ({catagory}) => {
+    console.log(catagory);
     return (
-        <div>
-            <h1>All courses</h1>
+        <div className='mt-5'>
+            <h1>Course title : {catagory.name}</h1>
         </div>
     );
 };

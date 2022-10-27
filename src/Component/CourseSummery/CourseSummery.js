@@ -12,7 +12,10 @@ const CourseSummery = ({ course }) => {
                     <Card.Text className='fw-normal'>
                         {course.details}
                     </Card.Text>
-                    <Button variant="primary">Details</Button>
+                    <Card.Text className='fw-bold'>
+                        Course fee :  {course.Course_fee}$
+                    </Card.Text>
+                    
                 </Card.Body>
             </Card>
         </div>
