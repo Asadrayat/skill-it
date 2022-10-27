@@ -9,6 +9,9 @@ import Login from './Component/Login/Login';
 import Register from './Component/Register/Register';
 import PrivateRoute from './Component/PrivateRoute/PrivateRoute'
 import Error from './Component/Error/Error';
+import CourseCatagory from './CourseCatagory/CourseCatagory';
+import Allcourses from './Component/Allcourses/Allcourses';
+import Home from './Component/Home/Home';
 
 function App() {
   const router = createBrowserRouter([
@@ -18,8 +21,9 @@ function App() {
       errorElement : <Error></Error>,
       children : [
         {
-          path: "/",
-          element: <Courses></Courses>,
+          path: "/home",
+          element: <Home></Home> ,
+          loader : () => fetch('http://localhost:5000/courses'),
         },
         {
           path: "/courses",
@@ -40,6 +44,15 @@ function App() {
         {
           path: "/register",
           element: <Register></Register>,
+        },
+        {
+          path: "/catagory/:id",
+          element: <CourseCatagory></CourseCatagory> ,
+          loader : ({params}) => fetch(`http://localhost:5000/catagory/${params.id}`),
+        },
+        {
+          path: "/courses/:id",
+          element: <Allcourses></Allcourses> ,
         }
       
       ]

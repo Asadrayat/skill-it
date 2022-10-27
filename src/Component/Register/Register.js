@@ -1,11 +1,32 @@
 import React from 'react';
-import { getAuth } from 'firebase/auth';
+import { getAuth, GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import app from '../Hook/firebaseConfig';
 import { AuthContext } from '../../Context/AuthProvider/Authprovider';
 import { useContext } from 'react';
 const auth = getAuth(app);
 const Register = () => {
-    const {createUser} = useContext(AuthContext);
+
+    const { providerLogin } = useContext(AuthContext);
+
+    const googleProvider = new GoogleAuthProvider();
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error));
+    }
+    const githubProvider = new GithubAuthProvider();
+    const handleGithubSignIn = () => {
+        providerLogin(githubProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error));
+    }
+    const { createUser } = useContext(AuthContext);
     const handleSubmit = event => {
         event.preventDefault();
         const form = event.target;
@@ -14,79 +35,84 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
         // console.log(name,email, password);
-        createUser(email,password,name,photoURL)
-        .then(result =>{
-            const user = result.user;
-            console.log(user);
-            form.reset();
-        })
-        .catch(e => console.error(e))
+        createUser(email, password, name, photoURL)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+            })
+            .catch(e => console.error(e))
     }
     return (
-        <div className="mt-5 position-absolute top-50 start-50 translate-middle ">
+        <div className=" border border-dark m-4 p-3 rounded-2 mt-5 position-absolute top-50 start-50 translate-middle ">
             <div className='mb-3 text-center'>
                 <h1>Signup here</h1>
             </div>
             <div className="main-container d-flex container justify-content-between align-items-center justify-content-center">
-                <div className="register-form  text-center">
-                    <p>{"error"}</p>
+                <div className="d-flex justify-content-between register-form  text-center">
+                    <div>
+                        <p>{"error"}</p>
+                        <form onSubmit={handleSubmit} className="input-box">
+                            <input
+                                className="form-control p-3 m-2"
+                                type="text"
+                                name='name'
+                                placeholder="Your name"
+                            />
+                            <input
+                                className="form-control p-3 m-2"
+                                type="text"
+                                name='photoURL'
+                                placeholder="photoURL"
+                            />
+                            <input
+                                className="form-control p-3 m-2"
+                                type="email"
+                                name='email'
+                                placeholder="Email"
+                                required
+                            />
+                            <input
+                                className="form-control p-3 m-2"
+                                type="password"
+                                name='password'
+                                placeholder="password"
+                                required
+                            />
 
-                    <form onSubmit={handleSubmit} className="input-box">
-                        <input
-                            className="form-control p-3 m-2"
-                            type="text"
-                            name='name'
-                            placeholder="Your name"
-                        />
-                        <input
-                            className="form-control p-3 m-2"
-                            type="text"
-                            name='photoURL'
-                            placeholder="photoURL"
-                        />
-                        <input
-                            className="form-control p-3 m-2"
-                            type="email"
-                            name='email'
-                            placeholder="Email"
-                            required
-                        />
-                        <input
-                            className="form-control p-3 m-2"
-                            type="password"
-                            name='password'
-                            placeholder="password"
-                            required
-                        />
+
+                            <button
+                                type="submit" className="btn btn-info mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
+                                Signup Now
+                            </button>
+                        </form >
+                    </div>
 
 
-                        <button 
-                            type="submit" className="btn btn-info mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
-                            Signup Now
+                    <div className='p-4 '>
+                        <button onClick={handleGoogleSignIn} className="btn mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
+                            <div class="github">
+                                <img
+                                    className=" px-2 image-fluid btn-image"
+                                    src="https://img.icons8.com/color/344/google-logo.png"
+                                    alt=""
+                                />
+                            </div>
+
+                            <p className="fw-bold">Google SignIn</p>
                         </button>
-                    </form >
-                    <button className="btn mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
-                        <div class="github">
-                            <img
-                                className=" px-2 image-fluid btn-image"
-                                src="https://img.icons8.com/color/344/google-logo.png"
-                                alt=""
-                            />
-                        </div>
+                        <button onClick={handleGithubSignIn} className="btn mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
+                            <div class="github">
+                                <img
 
-                        <p className="fw-bold">Google SignIn</p>
-                    </button>
-                    <button className="btn mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
-                        <div class="github">
-                            <img
-
-                                className="px-2 image-fluid btn-image"
-                                src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
-                                alt=""
-                            />
-                        </div>
-                        <p className=" fw-bold">Github SignIn</p>
-                    </button>
+                                    className="px-2 image-fluid btn-image"
+                                    src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+                                    alt=""
+                                />
+                            </div>
+                            <p className=" fw-bold">Github SignIn</p>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

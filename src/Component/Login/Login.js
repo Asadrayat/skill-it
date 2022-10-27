@@ -42,10 +42,10 @@ const Login = () => {
             .catch(error => console.error(error));
     }
     return (
-        <div className="mt-5 position-absolute top-50 start-50 translate-middle ">
+        <div className="border border-dark m-4 p-3 rounded-2 mt-5 position-absolute top-50 start-50 translate-middle ">
             <div className="main-container d-flex container justify-content-between align-items-center justify-content-center">
                 <div className="register-form ">
-                    <p>{"error"}</p>
+                    <p className='ms-3'>{"error"}</p>
                     <form onSubmit={handleSubmit} className="input-box">
                         <input
                             className="form-control p-3 m-2"
@@ -60,12 +60,12 @@ const Login = () => {
                             placeholder="password"
                         />
                         <p className="link ">
-                            <Link to="/register" className="text-decoration-none">
-                                <small className="text-danger link">
+                            <Link to="/register" className="text-center text-decoration-none">
+                                <small className="ms-4 text-danger link">
                                     are you new? please register
-                                </small>
+                                </small> <br />
                             </Link>
-                            <span role="button" className="ms-4 text-center  text-primary cursor-pointer">
+                            <span role="button" className=" text-center ms-4 text-center  text-primary cursor-pointer">
                                 <Link to="/register">Forget Password?</Link>
                             </span>
                         </p>
