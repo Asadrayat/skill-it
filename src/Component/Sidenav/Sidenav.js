@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './sidenav.css';
 
 const Sidenav = () => {
     const [categories, setCategories] = useState([]);
@@ -12,12 +13,12 @@ const Sidenav = () => {
 
     })
     return (
-        <div className='bg-dark mt-5 h-100 progress-bar progress-bar-striped bg-success' >
+        <div className='sidebar mt-5  bg-dark bg-opacity-70% ' >
             <h1 className='p-4 text-light'>All Catagories : {categories.length}</h1>
             <div className='p-4 '>
                 {
                     categories.map(category => <p  key={category.id}>
-                        <Link to={`catagory/:${category.id}`}>{category.name}</Link>
+                        <Link to={`catagory/${category.id}`}>{category.name}</Link>
                     </p>)
                 }
             </div>

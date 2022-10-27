@@ -14,10 +14,10 @@ const Error = () => {
                         Sorry, we couldn't find this page.
                     </p>
                     <Link
-                        to='/'
+                        to='/home'
                         className=''
                     >
-                        Back to Courses
+                        Home
                     </Link>
                 </div>
             </div>

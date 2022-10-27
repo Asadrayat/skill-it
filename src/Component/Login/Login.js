@@ -42,7 +42,7 @@ const Login = () => {
             .catch(error => console.error(error));
     }
     return (
-        <div className="border border-dark m-4 p-3 rounded-2 mt-5 position-absolute top-50 start-50 translate-middle ">
+        <div className="mt-5  ">
             <div className="main-container d-flex container justify-content-between align-items-center justify-content-center">
                 <div className="register-form ">
                     <p className='ms-3'>{"error"}</p>

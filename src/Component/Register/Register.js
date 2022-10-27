@@ -44,7 +44,7 @@ const Register = () => {
             .catch(e => console.error(e))
     }
     return (
-        <div className=" border border-dark m-4 p-3 rounded-2 mt-5 position-absolute top-50 start-50 translate-middle ">
+        <div className=" border border-dark m-4 p-3 rounded-2 mt-5  ">
             <div className='mb-3 text-center'>
                 <h1>Signup here</h1>
             </div>

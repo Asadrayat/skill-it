@@ -31,13 +31,13 @@ const Header = () => {
                     </Link>
                 </div>
                 <div>
-                    <Link to="/courses" className="text-decoration-none">
+                    <Link to="/home" className="text-decoration-none">
                         <li className="nav-link items  ms-5 p-0 text-light fw-bolder"><h1>Skill-it </h1></li>
 
                     </Link>
                 </div>
                 <div className="menu-container d-flex flex-wrap ">
-                    <Link to="/courses" className="text-decoration-none">
+                    <Link to="/home" className="text-decoration-none">
                         <li className="nav-link items  ms-5 text-light fw-bolder">Courses</li>
                     </Link>
                     <Link to='/blog' className="text-decoration-none">

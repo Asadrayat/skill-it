@@ -26,7 +26,7 @@ function App() {
           loader : () => fetch('http://localhost:5000/courses'),
         },
         {
-          path: "/courses",
+          path: "/home",
           element: <PrivateRoute><Courses></Courses></PrivateRoute> ,
         },
         {
