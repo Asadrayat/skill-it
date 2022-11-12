@@ -6,24 +6,31 @@ import img from '../../assets/home.jpg'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/Authprovider';
 import './Header.css'
-import { Image } from 'react-bootstrap';
+import { useState } from 'react';
 const Header = () => {
     const { user, logout } = useContext(AuthContext);
+    const [btn, setBtnText] = useState('Light');
+    // console.log(user);
     const handleLogout = () => {
         logout()
             .then(() => { })
             .catch(error => console.error(error))
     }
+    const ChangeTheme = () => {
+        setBtnText('Dark');
+    }
+    const [isHovering, setIsHovering] = useState(false);
+    const handleMouseOver = () => {
+        setIsHovering(true)
+    }
+    const handleMouseOut = () => {
+        setIsHovering(false);
+    };
     const menuItem =
         <>
             <img className='w-20 h-12 mx-9 mt-3' src={img} alt="Avatar Tailwind CSS Component" srcset="" />
             <li>
-                <div>
-                    <Link to="/home" className="text-decoration-none">
-                        <li className="nav-link items  ms-5 p-0 text-light fw-bolder"><h1>Skill-it </h1></li>
-
-                    </Link>
-                </div>
+                <button className='btn btn-outline btn-ghost mt-3 ' onClick={ChangeTheme}>{btn}</button>
             </li>
             < li >
                 <Link to='/'><div>
@@ -54,6 +61,26 @@ const Header = () => {
                         <li>
                             <button onClick={handleLogout} className='btn btn-outline mt-3 btn-warning'>Sign Out</button>
                         </li>
+
+                        <li>{
+                            user?.photoURL ? <div>
+                                <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className="avatar">
+                                    <div className="w-24 rounded-full">
+                                        <img src={user?.photoURL} alt='Avatar' />
+                                    </div>
+                                    {isHovering && <h2>{user?.displayName}</h2>}
+                                </div>
+                            </div> :
+                                <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className="avatar">
+                                    <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
+                                    {isHovering && <h2>{user?.displayName}</h2>}
+                                </div>
+
+
+                        }
+
+
+                        </li>
                     </>
                     :
                     <li><Link to='/login'><button className="btn btn-outline btn-warning">Login</button></Link>
@@ -63,7 +90,7 @@ const Header = () => {
 
         </>
     return (
-        <div>
+        <div className='mt-12'>
             <div className="navbar bg-base-100 mb-12 h-24 font-semibold	">
                 <div className="navbar-start">
                     <div className="dropdown">
