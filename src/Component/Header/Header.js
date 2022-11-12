@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
-
+import img from '../../assets/home.jpg'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/Authprovider';
 import './Header.css'
@@ -14,77 +14,77 @@ const Header = () => {
             .then(() => { })
             .catch(error => console.error(error))
     }
-    return (
-        <div>
-            <nav className="d-flex  justify-content-around align-items-center bg-dark p-3 flex-wrap">
-                <div class="logo">
-                    <img
-                        className="img-fluid"
-                        src='https://cdn2.vectorstock.com/i/1000x1000/58/36/technical-skill-development-vector-26115836.jpg'
-                        alt=""
-                    />
-                </div>
-                <div>
-                    <Link to="/home" className="text-decoration-none">
-                        <li className="nav-link items  ms-5 p-0 text-light fw-bolder"><h1>Home </h1></li>
-
-                    </Link>
-                </div>
+    const menuItem =
+        <>
+            <img className='w-20 h-12 mx-9 mt-3' src={img} alt="Avatar Tailwind CSS Component" srcset="" />
+            <li>
                 <div>
                     <Link to="/home" className="text-decoration-none">
                         <li className="nav-link items  ms-5 p-0 text-light fw-bolder"><h1>Skill-it </h1></li>
 
                     </Link>
                 </div>
-                <div className="menu-container d-flex flex-wrap ">
+            </li>
+            < li >
+                <Link to='/'><div>
                     <Link to="/home" className="text-decoration-none">
-                        <li className="nav-link items  ms-5 text-light fw-bolder">Courses</li>
+                        <li className="nav-link items  ms-5 p-0 text-light fw-bolder"><h1>Home </h1></li>
+
                     </Link>
-                    <Link to='/blog' className="text-decoration-none">
-                        <li
-                            role="button"
-                            className="nav-link items  ms-5 text-light fw-bolder"
-                        >
-                            Blog
+                </div></Link>
+            </li>
+            <li>
+                <Link to="/home" className="text-decoration-none">
+                    <li className="nav-link items  ms-5 text-light fw-bolder">Courses</li>
+                </Link>
+            </li>
+            <li>
+                <Link to="/faq" className="text-decoration-none">
+                    <li className="nav-link items  ms-5 text-light fw-bolder">
+                        FAQ
+                    </li>
+                </Link>
+            </li>
+            < li > <Link to='/blog'>Blog</Link></li>
+
+
+            {
+                user?.email ?
+                    <>
+                        <li>
+                            <button onClick={handleLogout} className='btn btn-outline mt-3 btn-warning'>Sign Out</button>
                         </li>
-                    </Link>
+                    </>
+                    :
+                    <li><Link to='/login'><button className="btn btn-outline btn-warning">Login</button></Link>
 
+                    </li>
+            }
 
-                    <Link to="/faq" className="text-decoration-none">
-                        <li className="nav-link items  ms-5 text-light fw-bolder">
-                            FAQ
-                        </li>
-                    </Link>
-
-                    <p className='text-light ms-3'>
-                        {
-                            user?.uid ?
-                                <>
-                                    <button onClick={handleLogout} className='me-2 btn btn-light'>Logout</button>
-                                    <span>{user?.displayName}</span>
-                                </>
-                                :
-                                <>
-                                    <div className='d-flex justify-content-around'>
-                                        <Link to="/login" className="text-decoration-none">
-                                            <li className="nav-link items  ms-1 text-light fw-bolder">Login</li>
-                                        </Link>
-                                        <Link to="/register" className="text-decoration-none">
-                                            <li className="nav-link items  ms-1 text-light fw-bolder">Signup</li>
-                                        </Link>
-                                    </div>
-                                </>
-                        }
-                    </p>
-                    <div className='ms-3' >
-                        {user?.photoURL ?
-                            <Image roundedCircle style={{ height: "40px" }} src={user?.photoURL} ></Image>
-                            : <FontAwesomeIcon className='bg-light' icon={faUser}></FontAwesomeIcon>
-                        }
+        </>
+    return (
+        <div>
+            <div className="navbar bg-base-100 mb-12 h-24 font-semibold	">
+                <div className="navbar-start">
+                    <div className="dropdown">
+                        <label tabIndex={0} className="btn btn-ghost lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                        </label>
+                        <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                            {menuItem}
+                        </ul>
                     </div>
+                    <Link to='/' className="btn btn-ghost normal-case text-xl"><img alt="" /></Link>
+                </div>
+                <div className="navbar-center hidden lg:flex">
+                    <ul className="menu menu-horizontal p-0">
+                        {menuItem}
+                    </ul>
+                </div>
+                <div className="navbar-end">
 
                 </div>
-            </nav>
+            </div>
         </div>
     );
 };

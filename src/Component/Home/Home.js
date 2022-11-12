@@ -5,7 +5,7 @@ const Home = () => {
 const courses = useLoaderData();
 console.log(courses);
     return (
-        <div className='mt-5 fw-bolder'> 
+        <div className='mt-5 grid grid-cols-2 gap-4 fw-bolder'> 
            {
             courses.map(course => <CourseSummery
             key={course.id}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+
 import { Outlet } from 'react-router-dom';
 import Header from '../Header/Header';
 import Sidenav from '../Sidenav/Sidenav';
@@ -7,18 +7,17 @@ import Sidenav from '../Sidenav/Sidenav';
 const Main = () => {
     return (
         <div>
-
-            <Container>
+            <div>
                 <Header></Header>
-                <Row>
-                    <Col lg='4'>
+                <div className='grid grid-flow-row-dense grid-cols-3 grid-rows-3  gap-4'>
+                    <div >
                         <Sidenav></Sidenav>
-                    </Col>
-                    <Col lg="8">
+                    </div>
+                    <div className='col-span-2'>
                         <Outlet></Outlet>
-                    </Col>
-                </Row>
-            </Container>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

@@ -59,7 +59,7 @@ function App() {
     }
   ]);
   return (
-    <div class='container'>
+    <div className='max-w-screen-xl mx-auto'>
       <RouterProvider router={router}></RouterProvider>
     </div>
   );

@@ -13,11 +13,11 @@ const Sidenav = () => {
 
     })
     return (
-        <div className='sidebar mt-5  bg-dark bg-opacity-70% ' >
-            <h1 className='p-4 text-light'>All Catagories : {categories.length}</h1>
-            <div className='p-4 '>
+        <div className='sidebar mt-10  ' >
+            <h1 className='text-2xl  font-bold'>All Catagories : {categories.length}</h1>
+            <div className='text-2xl font-semibold grid grid-cols-1 align-middle '>
                 {
-                    categories.map(category => <p  key={category.id}>
+                    categories.map(category => <p className='mt-5 text-blue-600/100' key={category.id}>
                         <Link to={`catagory/${category.id}`}>{category.name}</Link>
                     </p>)
                 }
