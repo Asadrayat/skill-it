@@ -33,15 +33,15 @@ const Header = () => {
                 <button className='btn btn-outline btn-ghost mt-3 ' onClick={ChangeTheme}>{btn}</button>
             </li>
             < li >
-                <Link to='/'><div>
-                    <Link to="/home" className="text-decoration-none">
+                <div>
+                    <Link to="/" className="text-decoration-none">
                         <li className="nav-link items  ms-5 p-0 text-light fw-bolder"><h1>Home </h1></li>
 
                     </Link>
-                </div></Link>
+                </div>
             </li>
             <li>
-                <Link to="/home" className="text-decoration-none">
+                <Link to="/courses" className="text-decoration-none">
                     <li className="nav-link items  ms-5 text-light fw-bolder">Courses</li>
                 </Link>
             </li>

@@ -1,17 +1,12 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
-import CourseSummery from '../CourseSummery/CourseSummery';
+import About from './About/About';
+import Banner from './Banner/Banner';
+
 const Home = () => {
-const courses = useLoaderData();
-console.log(courses);
     return (
-        <div className='mt-5 grid grid-cols-2 gap-4 fw-bolder'> 
-           {
-            courses.map(course => <CourseSummery
-            key={course.id}
-            course ={course}
-            ></CourseSummery>)
-           }   
+        <div>
+            <Banner></Banner>
+            <About></About>
         </div>
     );
 };

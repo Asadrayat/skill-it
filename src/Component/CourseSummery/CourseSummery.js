@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './CourseSummery.css';
 
 const CourseSummery = ({ course }) => {
@@ -16,6 +17,7 @@ const CourseSummery = ({ course }) => {
                 <div className="card-actions justify-start">
                     <div className="badge badge-outline">Course_fee : ${course.Course_fee}</div>
                 </div>
+               
             </div>
         </div>
     );
