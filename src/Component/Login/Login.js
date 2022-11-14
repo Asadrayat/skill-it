@@ -11,7 +11,7 @@ const Login = () => {
     const { signIn } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
-    const from = location.state.from.pathname   || '/';
+    const from = location?.state?.from?.pathname  || '/';
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;

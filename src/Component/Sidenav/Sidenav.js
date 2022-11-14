@@ -7,7 +7,7 @@ import './sidenav.css';
 const Sidenav = () => {
     const [categories, setCategories] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/catagory')
+        fetch('https://skill-it-server.vercel.app/catagory')
             .then(res => res.json())
             .then(data => setCategories(data))
 

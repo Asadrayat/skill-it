@@ -3,10 +3,12 @@ import { getAuth, GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import app from '../Hook/firebaseConfig';
 import { AuthContext } from '../../Context/AuthProvider/Authprovider';
 import { useContext } from 'react';
+import { useState } from 'react';
 const auth = getAuth(app);
 const Register = () => {
 
     const { providerLogin } = useContext(AuthContext);
+    const [error, setError] = useState(null);
 
     const googleProvider = new GoogleAuthProvider();
     const handleGoogleSignIn = () => {
@@ -15,7 +17,10 @@ const Register = () => {
                 const user = result.user;
                 console.log(user);
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error)
+                setError(error.message)
+            });
     }
     const githubProvider = new GithubAuthProvider();
     const handleGithubSignIn = () => {
@@ -24,7 +29,10 @@ const Register = () => {
                 const user = result.user;
                 console.log(user);
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error)
+                setError(error.message)
+            });
     }
     const { createUser } = useContext(AuthContext);
     const handleSubmit = event => {
@@ -42,7 +50,10 @@ const Register = () => {
                 console.log(user);
                 form.reset();
             })
-            .catch(e => console.error(e))
+            .catch(e => {
+                console.error(e)
+                setError(e.message)
+            })
     }
     return (
         <div className=" border border-dark m-4 p-3 w-2/4 rounded-2 mt-5  ">
@@ -50,46 +61,46 @@ const Register = () => {
                 <h1>Signup here</h1>
             </div>
             <form onSubmit={handleSubmit} className="input-box">
-            <div>
-                        <p>{"error"}</p>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Name</span>
-                            </label>
-                            <input type="text" required placeholder="name" name="displayName" className="input input-bordered" />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Email</span>
-                            </label>
-                            <input type="text" required placeholder="email" name="email" className="input input-bordered" />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Password</span>
-                            </label>
-                            <input type="text" required placeholder="password" name="password" className="input input-bordered" />
+                <div>
+                    <p>{error}</p>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Name</span>
+                        </label>
+                        <input type="text" required placeholder="name" name="displayName" className="input input-bordered" />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Email</span>
+                        </label>
+                        <input type="text" required placeholder="email" name="email" className="input input-bordered" />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Password</span>
+                        </label>
+                        <input type="text" required placeholder="password" name="password" className="input input-bordered" />
 
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Confirm Password</span>
-                            </label>
-                            <input type="text" name="Confirm password" required placeholder="Confirm password" className="input input-bordered" />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Confirm Password</span>
+                        </label>
+                        <input type="text" name="Confirm password" required placeholder="Confirm password" className="input input-bordered" />
 
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Photo URL</span>
-                            </label>
-                            <input type="text" name="photoURL" required placeholder="photoUrl" className="input input-bordered" />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Photo URL</span>
+                        </label>
+                        <input type="text" name="photoURL" required placeholder="photoUrl" className="input input-bordered" />
 
-                        </div>
-                        <div className="form-control mt-6">
-                            <input type="submit" value="Sign Up" className="btn btn-primary" />
+                    </div>
+                    <div className="form-control mt-6">
+                        <input type="submit" value="Sign Up" className="btn btn-primary" />
 
-                        </div>
-                        {/* 
+                    </div>
+                    {/* 
                             <input
                                 className="form-control p-3 m-2"
                                 type="text"
@@ -123,14 +134,14 @@ const Register = () => {
                                 Signup Now
                             </button>
                         </form > */}
-                    </div>
+                </div>
             </form>
             <div className="main-container d-flex container justify-content-between align-items-center justify-content-center">
                 <div className="d-flex justify-content-between register-form  text-center">
-                    
 
 
-                <div className='flex flex-col'>
+
+                    <div className='flex flex-col'>
                         <button onClick={handleGoogleSignIn} className="btn btn-outline  btn-ghost mt-3 border text-center d-flex align-items-center justify-content-evenly py-3 px-5 m-auto">
                             <div className="w-10">
                                 <img

@@ -25,7 +25,7 @@ function App() {
         {
           path: "/courses",
           element: <Courses></Courses>,
-          loader: () => fetch('http://localhost:5000/courses'),
+          loader: () => fetch('https://skill-it-server.vercel.app/courses'),
         },
         {
           path: "/",
@@ -50,12 +50,12 @@ function App() {
         {
           path: "courses/catagory/:id/checkout",
           element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
-          loader: ({ params }) => fetch(`http://localhost:5000/catagory/${params.id}`),
+          loader: ({ params }) => fetch(`https://skill-it-server.vercel.app/catagory/${params.id}`),
         },
         {
           path: "courses/catagory/:id",
           element: <CourseCatagory></CourseCatagory>,
-          loader: ({ params }) => fetch(`http://localhost:5000/catagory/${params.id}`),
+          loader: ({ params }) => fetch(`https://skill-it-server.vercel.app/catagory/${params.id}`),
         },
         {
           path: "/courses/:id",
