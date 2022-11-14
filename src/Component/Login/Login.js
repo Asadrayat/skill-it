@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/Authprovider';
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import './Login.css'
@@ -9,7 +9,9 @@ import { useState } from 'react';
 const Login = () => {
     const [error, setError] = useState(null);
     const { signIn } = useContext(AuthContext);
+    const location = useLocation();
     const navigate = useNavigate();
+    const from = location.state.from.pathname   || '/';
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -20,9 +22,12 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset();
-                navigate('/');
+                navigate(from , {replace : true});
             })
-            .catch(e => console.error(e))
+            .catch(e => {
+                console.error(e)
+                setError(e.message)
+            })
     }
     const { providerLogin } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
@@ -32,7 +37,10 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error)
+                setError(error.message)
+            });
     }
     const githubProvider = new GithubAuthProvider();
     const handleGithubSignIn = () => {
@@ -41,7 +49,10 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error)
+                setError(error.message)
+            });
     }
     return (
         <div className="mt-5 mx-10   ">
